@@ -8,8 +8,13 @@
 
 #include <stdio.h>
 
+char userName[100] = {'\0'};
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+    
+    printf("Safecracker!\n");
+    
+    
+    
     return 0;
 }
