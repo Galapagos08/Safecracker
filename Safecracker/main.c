@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+void crackIt();
 
 
 int main(int argc, const char * argv[]){
@@ -89,8 +90,23 @@ int main(int argc, const char * argv[]){
                 printf("%s, you guessed the fourth number correctly!\n\n", name);
                 numberCorrect = numberCorrect + 1;
             }
+            if (numberCorrect > 0) {
+                printf("Congratulations, %s, you guessed %d correct!\n\nWould you like to play again? (1=Y/2=N)\n\n", name, numberCorrect);
+            } else {
+                printf("Wow, %s! You did not guess even one number correctly! What a bad guess you made!\n\nWould you like to play again? (1=Y/2=N)\n\n", name);
+            }
+            int keepPlaying = 9;
+            fpurge(stdin);
+            while (keepPlaying < 1 || keepPlaying >= 3) {
+                error = scanf("%d", &keepPlaying);
+                if (error != 1 || keepPlaying < 1 || keepPlaying >= 3 ) {
+                    printf("Please enter 1 or 2: \n\n");
+                }
+            }
         }
-        printf("Congratulations, %s, you guessed %d correct!\n\nWould you like to play again?\n\n", name, numberCorrect);
     }
     return 0;
+}
+void crackIt() {
+    
 }
