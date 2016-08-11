@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 char userName[100] = {'\0'};
@@ -35,7 +36,7 @@ int main(int argc, const char * argv[]){
     printf("%s, you need to crack the safe. There are four digits in the combination, and each digit has a possible value from zero to three. (Hint: It's possible the combination may contain a number more than once.)\n\n", name);
     
     printf("%s, please enter the first digit of your guess.\n\n", name);
-    int guess[4];
+    int guess[4] = {-1, -1, -1, -1};
     int error = 5;
     
     while (guess[0] < 0 || guess[0] > 3) {
