@@ -11,8 +11,6 @@
 #include <string.h>
 
 
-char userName[100] = {'\0'};
-
 
 int main(int argc, const char * argv[]){
     
@@ -37,6 +35,10 @@ int main(int argc, const char * argv[]){
     
     printf("%s, please enter the first digit of your guess.\n\n", name);
     int guess[4] = {-1, -1, -1, -1};
+    
+    
+    
+    
     int error = 5;
     
     while (guess[0] < 0 || guess[0] > 3) {
@@ -92,5 +94,3 @@ int main(int argc, const char * argv[]){
     }
     return 0;
 }
-
-
