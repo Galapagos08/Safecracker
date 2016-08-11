@@ -11,7 +11,6 @@
 #include <string.h>
 
 
-
 int main(int argc, const char * argv[]){
     
     printf("Safecracker!\n\n");
@@ -34,13 +33,9 @@ int main(int argc, const char * argv[]){
     printf("%s, you need to crack the safe. There are four digits in the combination, and each digit has a possible value from zero to three. (Hint: It's possible the combination may contain a number more than once.)\n\n", name);
     
     printf("%s, please enter the first digit of your guess.\n\n", name);
+    fpurge(stdin);
     int guess[4] = {-1, -1, -1, -1};
-    
-    
-    
-    
     int error = 5;
-    
     while (guess[0] < 0 || guess[0] > 3) {
         fpurge(stdin);
         error = scanf("%d", &guess[0]);
@@ -73,24 +68,29 @@ int main(int argc, const char * argv[]){
         }
     }
     printf("%s, your guess is %d-%d-%d-%d.\n\n", name, guess[0], guess[1], guess[2], guess[3]);
-    
+    int numberCorrect = 0;
     printf("%s, the safe combination is %d-%d-%d-%d.\n\n", name, safeCombo[0], safeCombo[1], safeCombo[2], safeCombo[3]); {
         if (guess[0] == safeCombo[0] && guess[1] == safeCombo[1] && guess[2] == safeCombo[2] && guess[3] == safeCombo[3] ) {
             printf("%s, you guessed the code correctly! Great job!\n\n", name);
         } else {
             if (guess[0] == safeCombo[0]){
-                printf("You guessed the first number correctly!\n\n");
+                printf("%s, you guessed the first number correctly!\n\n", name);
+                numberCorrect = numberCorrect + 1;
             }
             if (guess[1] == safeCombo[1]){
-                printf("You guessed the second number correctly!\n\n");
+                printf("%s, you guessed the second number correctly!\n\n", name);
+                numberCorrect = numberCorrect + 1;
             }
             if (guess[2] == safeCombo[2]){
-                printf("You guessed the third number correctly!\n\n");
+                printf("%s, you guessed the third number correctly!\n\n", name);
+                numberCorrect = numberCorrect + 1;
             }
             if (guess[3] == safeCombo[3]){
-                printf("You guessed the fourth number correctly!\n\n");
+                printf("%s, you guessed the fourth number correctly!\n\n", name);
+                numberCorrect = numberCorrect + 1;
             }
         }
+        printf("Congratulations, %s, you guessed %d correct!\n\nWould you like to play again?\n\n", name, numberCorrect);
     }
     return 0;
 }
