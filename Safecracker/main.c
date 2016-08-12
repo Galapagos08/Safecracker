@@ -11,10 +11,8 @@
 #include <string.h>
 
 int getUserName(char name[], char *prompt);
-void functionThatUsesName(char[]);
-int guess[4];
+int functionThatUsesName(char[], int safeCombo[]);
 int error = 5;
-void functionThatUsesSafeCombo(int safeCombo[], char name[]);
 char name[100] = "\0";
 
 int main(int argc, const char * argv[]){
@@ -40,9 +38,10 @@ int main(int argc, const char * argv[]){
     };
     
     printf("%s, you need to crack the safe. There are four digits in the combination, and each digit has a possible value from zero to three. (Hint: It's possible the combination may contain a number more than once.)\n\n", name);
-    
-    functionThatUsesName(name);
-    functionThatUsesSafeCombo(safeCombo, name);
+    int replay = 1;
+    while (replay == 1) {
+        replay = functionThatUsesName(name, safeCombo);
+    }
     
         return 0;
 }
@@ -55,7 +54,7 @@ int getUserName(char name[], char *prompt) {
     }
     return numberOfItemsScanned;
 }
-void functionThatUsesName(char name[]){
+int functionThatUsesName(char name[], int safeCombo[]){
     printf("%s, please enter the first digit of your guess.\n\n", name);
     fpurge(stdin);
     int guess[4] = {-1, -1, -1, -1};
@@ -92,12 +91,12 @@ void functionThatUsesName(char name[]){
         }
     }
     printf("%s, your guess is %d-%d-%d-%d.\n\n", name, guess[0], guess[1], guess[2], guess[3]);
-}
-void functionThatUsesSafeCombo(int safeCombo[], char name[]) {
+
     int numberCorrect = 0;
     if (guess[0] == safeCombo[0] && guess[1] == safeCombo[1] && guess[2] == safeCombo[2] && guess[3] == safeCombo[3] ) {
         printf("%s, the safe combination is %d-%d-%d-%d.\n\n", name, safeCombo[0], safeCombo[1], safeCombo[2], safeCombo[3]);
         printf("%s, you guessed the code correctly! Great job!\n\n", name);
+        return 0;
     } else {
         if (guess[0] == safeCombo[0]){
             printf("%s, you guessed the first number correctly!\n\n", name);
@@ -117,6 +116,15 @@ void functionThatUsesSafeCombo(int safeCombo[], char name[]) {
         }
         if (numberCorrect > 0) {
             printf("Congratulations, %s, you guessed %d correct!\n\nBased on what you know now, would you like to try again? (1=Y/2=N)\n\n", name, numberCorrect);
+            int keepPlaying = 9;
+            fpurge(stdin);
+            while (keepPlaying < 1 || keepPlaying >= 3) {
+                error = scanf("%d", &keepPlaying);
+                if (error != 1 || keepPlaying < 1 || keepPlaying >= 3 ) {
+                    printf("Please enter 1 or 2: \n\n");
+                }
+            }
+            return keepPlaying;
         } else {
             printf("Wow, %s! You did not guess even one number correctly! What a bad guess you made!\n\nWould you like to try again? (1=Y/2=N)\n\n", name);
         }
@@ -128,5 +136,6 @@ void functionThatUsesSafeCombo(int safeCombo[], char name[]) {
                 printf("Please enter 1 or 2: \n\n");
             }
         }
+        return keepPlaying;
     }
 }
